@@ -4,6 +4,7 @@ import TheWelcome from './components/TheWelcome.vue'
 import { ref } from 'vue';
 
 let count = ref (0)
+let countTen = ref (0)
 
 function increment(){
   count.value++
@@ -11,6 +12,19 @@ function increment(){
 
 function decrement(){
   count.value--
+}
+
+function incrementTen(){
+  countTen.value +=10
+}
+
+function decrementTen(){
+  countTen.value -=10
+}
+
+function reset(){
+  count.value = 0
+  countTen.value = 0
 }
 </script>
 
@@ -26,9 +40,21 @@ function decrement(){
   <main>
     <TheWelcome />
 
-    <button @click="decrement()">-</button>
+    <div>
+      <button @click="decrement()">-</button>
     <span>{{ count }}</span>
     <button @click="increment()">+</button>
+      </div>
+
+      <div>
+        <button @click="decrementTen()">-10</button>
+    <span>{{ countTen }}</span>
+    <button @click="incrementTen()">+10</button>
+      </div>  
+    
+
+    <button @click="reset()">reset</button>
+    
   </main>
 </template>
 
