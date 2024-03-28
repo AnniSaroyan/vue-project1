@@ -1,88 +1,68 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import { ref } from 'vue';
+<script >
 
-let count = ref (0)
-let countTen = ref (0)
+export default {
+  data() {
+    return {
+      email: '',
+      isValid: false,
+      emailColor: '',
+      validColor: 'green',
+      invalidColor: 'red',
 
-function increment(){
-  count.value++
+    }
+  },
+
+  methods: {
+
+    checkEmail() {
+      let inputEmail = prompt('Enter your email:');
+      if (inputEmail !== null) {
+        this.email = inputEmail.trim();
+        this.isValid = this.validateEmail(this.email)
+        this.emailColor = this.isValid ? 'green' : 'red';
+      }
+    },
+
+    validateEmail(email) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailPattern.test(email);
+    },
+    reset() {
+      this.email = '';
+      this.isValid = false;
+      this.emailColor = '';
+    },
+
+  },
 }
 
-function decrement(){
-  count.value--
-}
 
-function incrementTen(){
-  countTen.value +=10
-}
-
-function decrementTen(){
-  countTen.value -=10
-}
-
-function reset(){
-  count.value = 0
-  countTen.value = 0
-}
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <div> <button class="email" @click="checkEmail">Input Email</button> </div>
+    <h1 :style="{ border: isValid ? '2px solid green' : '2px solid red' }">{{ email }}</h1>
+    <h4 v-if="email" :style="{ color: validColor }">{{ isValid ? 'The email is valid' : '' }} </h4>
+    <h4 v-if="email" :style="{ color: invalidColor }">{{ isValid ? '' : 'The email is invalid' }}</h4>
+    <button @click="reset">Reset</button>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+
   </header>
 
   <main>
     <TheWelcome />
 
-    <div>
-      <button @click="decrement()">-</button>
-    <span>{{ count }}</span>
-    <button @click="increment()">+</button>
-      </div>
 
-      <div>
-        <button @click="decrementTen()">-10</button>
-    <span>{{ countTen }}</span>
-    <button @click="incrementTen()">+10</button>
-      </div>  
-    
 
-    <button @click="reset()">reset</button>
-    
   </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<style>
+.email {
+  margin-bottom: 5px;
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+  width: 150px;
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 }
 </style>
