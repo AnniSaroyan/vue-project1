@@ -38,7 +38,7 @@ export default {
 </script>
 
 <template>
-    <div v-if="mode = 'AMD'">
+    <div v-if="mode === 'AMD'">
         <h4> AMD -> USD </h4>
         <input type="number" :value="value" @input="handleInput" @focus="handleInputFocus">
         <input type="number" disabled :value="value / rate">
