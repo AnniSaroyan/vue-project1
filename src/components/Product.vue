@@ -12,9 +12,11 @@ export default {
     },
 
     props: {
-        name: String,
-        price: String,
-        description: String
+        fruit: {
+            type: Object,
+            required: true
+        }
+
     }
 
 }
@@ -22,7 +24,11 @@ export default {
 </script>
 
 <template>
-    <Name :value='name' />
-    <Price :value='price' />
-    <Description :value='description' />
+    <div>
+
+        <Name :value='fruit.name' />
+        <Price :value='fruit.price' />
+        <Description :value='fruit.description' />
+
+    </div>
 </template>

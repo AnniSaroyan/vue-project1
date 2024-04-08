@@ -48,8 +48,7 @@ export default {
 </script>
 
 <template>
-  <Product v-for="(fruit, index) in fruits" :key="index" :name="fruit.name" :price="fruit.price"
-    :description="fruit.description" />
+  <Product v-for="fruit in fruits" :fruit="fruit" :key="fruit.name" />
 </template>
 
 
